@@ -1,11 +1,14 @@
 require('dotenv').config();
 
+const path = require('path');
+
 const express = require('express');
 
 
 const server = express();
 
 server.use(express.json());
+server.use(express.static(path.join(__dirname, 'client/build')));
 
 const port = process.env.PORT;
 
@@ -25,7 +28,7 @@ server.get('/api/characters', (req, res) => {
 
 
 server.get('*', (req, res) => {
-    res.json({ message: "Welp, it's working." });
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
 server.listen(port, () => {
