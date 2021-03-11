@@ -7,6 +7,8 @@ const express = require('express');
 
 const server = express();
 
+const data = require('./data/diablo2-api');
+
 server.use(express.json());
 server.use(express.static(path.join(__dirname, 'client/build')));
 
@@ -19,11 +21,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // API endpoint
 server.get('/api/characters', (req, res) => {
-    res.json({
-        necromancer: 'Revives the dead.',
-        sorceress: 'Practices arcane magics.',
-        druid: 'One with nature.'
-    })
+    res.send(data)
 })
 
 
